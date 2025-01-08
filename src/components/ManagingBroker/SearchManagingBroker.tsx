@@ -15,7 +15,7 @@ type SearchManagingBrokerProps = {
   openCreateManagingBrokerModal: () => void;
 };
 
-export function NameSearchBar({
+export function SearchManagingBroker({
   managingBrokers,
   selectedManagingBroker,
   setSelectedManagingBroker,
@@ -45,7 +45,7 @@ export function NameSearchBar({
                         display: "inline",
                         cursor: "pointer",
                       }}
-                      onClick={openCreateManagingBrokerModal}
+                      onMouseDown={openCreateManagingBrokerModal}
                     >
                       Add manually
                     </Typography>
