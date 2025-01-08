@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { SearchManagingBroker } from "./SearchManagingBroker";
 import { Box, Stack } from "@mui/material";
-import data from "./exampleData.json";
+import data from "./managinBrokers.json";
 import { useState } from "react";
 import { CreateManagingBrokerModal } from "./CreateManagingBrokerModal";
 
@@ -15,14 +15,23 @@ export type ManagingBrokerType = {
   country?: string;
 };
 
-const managingBrokers: ManagingBrokerType[] = data.managingBrokers;
-
 export function ManagingBroker() {
+  const [managingBrokers, setManagingBrokers] =
+    useState<ManagingBrokerType[]>(data);
   const [selectedManagingBroker, setSelectedManagingBroker] =
     useState<ManagingBrokerType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpen = () => setIsModalOpen(true);
-  const handleClose = () => setIsModalOpen(false);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleNewManagingBroker = (newManagingBroker: ManagingBrokerType) => {
+    addManagingBroker(newManagingBroker);
+    setSelectedManagingBroker(newManagingBroker);
+  };
+
+  const addManagingBroker = (newManagingBroker: ManagingBrokerType) =>
+    setManagingBrokers((prevState) => [...prevState, newManagingBroker]);
+
   return (
     <>
       <Card>
@@ -47,10 +56,23 @@ export function ManagingBroker() {
               openCreateManagingBrokerModal={handleOpen}
             />
           </Stack>
+          {selectedManagingBroker && (
+            <>
+              <Box>
+                <Typography variant={"caption"}>Address</Typography>
+                <Typography>{`${selectedManagingBroker?.address}, ${selectedManagingBroker?.city}`}</Typography>
+              </Box>
+              <Box>
+                <Typography variant={"caption"}>Country</Typography>
+                <Typography>{`${selectedManagingBroker?.country}`}</Typography>
+              </Box>
+            </>
+          )}
         </CardContent>
         <CreateManagingBrokerModal
           isModalOpen={isModalOpen}
-          handleClose={handleClose}
+          closeModal={closeModal}
+          addManagingBroker={handleNewManagingBroker}
         />
       </Card>
     </>

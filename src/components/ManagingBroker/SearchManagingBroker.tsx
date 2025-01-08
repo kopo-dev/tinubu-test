@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
 import { Box, Divider, Typography } from "@mui/material";
 import { ManagingBrokerType } from "./ManagingBroker";
+import { useEffect, useState } from "react";
 
 type SearchManagingBrokerProps = {
   managingBrokers: ManagingBrokerType[];
@@ -21,8 +22,13 @@ export function SearchManagingBroker({
   setSelectedManagingBroker,
   openCreateManagingBrokerModal,
 }: SearchManagingBrokerProps) {
+  const [currentOption, setCurrentOption] = useState(selectedManagingBroker);
+  useEffect(() => {
+    setCurrentOption(selectedManagingBroker);
+  }, [selectedManagingBroker]);
   return (
     <Autocomplete
+      value={currentOption}
       options={managingBrokers}
       forcePopupIcon={false}
       onChange={(_, value) => setSelectedManagingBroker(value)}
