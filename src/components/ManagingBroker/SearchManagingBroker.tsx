@@ -1,13 +1,14 @@
+import { useEffect, useState } from "react";
+
 import TextField from "@mui/material/TextField";
 import Autocomplete, {
   AutocompleteRenderInputParams,
 } from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
-
 import Paper from "@mui/material/Paper";
 import { Box, Divider, Typography } from "@mui/material";
+
 import { ManagingBrokerType } from "./ManagingBroker";
-import { useEffect, useState } from "react";
 
 type SearchManagingBrokerProps = {
   managingBrokers: ManagingBrokerType[];
@@ -39,25 +40,21 @@ export function SearchManagingBroker({
         paper: {
           component: (props) => (
             <Paper>
-              {
-                <>
-                  {props.children}
-                  <Divider />
-                  <Box padding={2}>
-                    or{" "}
-                    <Typography
-                      sx={{
-                        textDecoration: "underline",
-                        display: "inline",
-                        cursor: "pointer",
-                      }}
-                      onMouseDown={openCreateManagingBrokerModal}
-                    >
-                      Add manually
-                    </Typography>
-                  </Box>
-                </>
-              }
+              {props.children}
+              <Divider />
+              <Box padding={2}>
+                {"or "}
+                <Typography
+                  sx={{
+                    textDecoration: "underline",
+                    display: "inline",
+                    cursor: "pointer",
+                  }}
+                  onMouseDown={openCreateManagingBrokerModal}
+                >
+                  Add manually
+                </Typography>
+              </Box>
             </Paper>
           ),
         },

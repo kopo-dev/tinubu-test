@@ -51,8 +51,8 @@ export function CreateManagingBrokerModal({
   });
 
   const handleClose = () => {
-    reset();
     closeModal();
+    reset();
   };
 
   const onSubmit: SubmitHandler<CreateManagingBrokerModalFormInput> = (
@@ -131,14 +131,13 @@ export function CreateManagingBrokerModal({
             rules={{ required: "Country is required" }}
           />
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ p: 3, pt: 0 }}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={handleSubmit(onSubmit)}
             autoFocus
             variant="contained"
             type="submit"
-            color="success"
           >
             Save
           </Button>
